@@ -8,6 +8,7 @@ Development in Unity for a long time and during these years I have created diffe
 Pearl is the set of my knowledge: a framework that facilitates the development of Unity making the architecture of the game very modular and therefore less affected by errors.
 
 Pearl uses the updated version of NET (4.0); therefore, lower NET version will not make the framework work.
+
 To view a demo in Unity, view this repository: https://github.com/AmalfiZodiaco/Pearl-Demo
 The demo was performed on the LSV version of Unity 2017.
 
@@ -21,12 +22,12 @@ This is a list of the features of Pearl.
 - Central trigger management system (see trigger System)
 - Timer object and clock (see Time System)
 - Input reading system integrated with the event manager (see Input System)
-- Component that allows you to keep the object between scenes (see...)
-- Component that allows you to control the destruction of your gameobject (se...)
-- A debug that allows you to write also in build
-- Generic prefab of a gameManager
-- Generic prefab of a LevelManager
-- Class system for creating a logical graph
+- Component that allows you to keep the object between scenes (see Components)
+- Component that allows you to control the destruction of your gameobject (see Components)
+- A debug that allows you to write also in build (see Debug System)
+- Generic prefab of a gameManager (see GameManager System)
+- Generic prefab of a LevelManager (see LevelManager System)
+- Class system for creating a logical graph (see Graph System)
 - Creation of various extensions to known classes: Dictionary, Enum, Sprite, Transform, GameObject, Math, Quaternion, Layer, etc. (see...)
 
 ### STRUCTURE
@@ -459,14 +460,15 @@ The singleton class, found in the "Scripts / Game Manager System", has several v
 If you want to create a custom GameManager, it must be a child of the GameManager (/ The naming convention is $ Game Title $ + "Manager"),
 Remember to replace the custom GameManager in the GameManager prefab.
 
-
 ### NewLevel
 This method allows you to change scene.
+
 **Input**:
 - An element of SceneEnum that consists of the scene in which we want to arrive.
 
 ### EnableMouse
 This method allows you to enable or disable the mouse.
+
 **Input**:
 - A Boolean indicating that the mouse must be enabled or disabled.
 
