@@ -45,6 +45,8 @@ The classes are divided into four categories:
 
 In the remaining document we will describe each function so you can use it for each project.
 
+P.S: I will not list all the classes, but only the most complex ones (the others are very self-explanatory)
+
 ## EVENT SYSTEM
 
 The scripts contained in the "Scripts / Events System" folder are the heart of Pearl and allow you to have three characteristics:
@@ -467,3 +469,148 @@ This method allows you to change scene.
 This method allows you to enable or disable the mouse.
 **Input**:
 - A Boolean indicating that the mouse must be enabled or disabled.
+
+### LEVEL MANAGER SYSTEM
+In the "Scripts/Level Manager System" folder are the classes that are related to the LevelManager concept.
+The LevelManager is a class that contains general data and methods useful for a generic level.
+In the "external/Prefab" folder there is the LevelManager prefab that must be placed in every game scene.
+
+#### LEVEL MANAGER
+This singleton class, found in "Scripts / level Manager System" has several variables in the inspector:
+- The prefabs of the Pools Creator (see pools system)
+If you want to create a custom LevelManager for each level you must create a new child element of the LevelManager (The naming convention is $ Level Title $ + "Manager").
+
+Remember to replace the custom LevelManager in the LevelManager prefab instance.
+The class has two functions:
+- Instantize, if it exists, the pools Creator (if you use the level manager, remember not to put the pools creator on the scene).
+- Activate its PauseComponent component when the CallPause event is called. In this component, when the game is paused it will activate the Time.timeScale = 0 or Time.timeScale = 1 when the game is no longer paused.
+
+## EXTEND UI
+The "Scripts / Extend UI" folder contains scripts that let you create UI easier.
+The abstraction that uses Pearl to create the menus is that a UI is made up of panels and there is always only one panel open while all the others are closed.
+If you want to create a UI using Pearl, you must follow these rules.
+- The direct children of the canvas are a list of all the panels.
+- The root of each panel must have the Multitags component and have the Panel tag in it.
+- The children of the panel are the elements that appear only inside the parent panel.
+- Convention: Panels must end with "Panel" suffix.
+In the image below, an example of a minimal UI.
+
+![Screenshot](Images/11.PNG)
+
+
+### MENU MANAGERS
+The abstract class, which is located in the "Script / UI Extend" folder, must be the parent of all UIs that are created through the Pearl system.
+This class has two variables in the inspector:
+- The first variable indicates the first GameObject that will be selected in the UI.
+- The second indicates whether the UI is an initial UI (menu) or in game (pause).
+
+This default class is subscribed to two events:
+- *GetInputEntryMenu*: returns to the previous action by pressing the / i key associated with the event.
+- *GetInputReturnUI*: allows you to open / close the menu by pressing the key associated to the event / s, it works only when the UI is in status pause.
+
+In the game, if you call the menu, the class will call the CallPause event (putting the game on pause).
+
+#### ChangeButton
+This public method of UI (which can be activated, then via buttons, etc.), allows you to change the selected / active object. If the button is in another panel, the reference panel will also change.
+
+**Input**:
+- The reference to the gameobject that you want to select / activate.
+
+#### Quit
+This method allows you to close the game.
+
+#### New Game
+This method allows you to start a new game using the GameManager.
+**Input**:
+- the ScenEnum element representing the initial scene
+
+## TRIGGER SYSTEM
+Premise: this element has been tested little and certainly will be corrected and improved in future editions.
+The scripts in the "Scripts / Trigger System" folder take care of creating Trigger between objects in a cleaner way.
+
+The focus is to have Trigger Manager (a trigger handler) in every gameobject. The trigger manager manages all triggers (triggered gameobjects) and routes trigger information to events that need it.
+
+![Screenshot](Images/12.PNG)
+
+The trigger could have information to give to the Trigger Manager, for this it must possess the ComplexAction component that has a string-object dictionary. When the trigger manager is activated (when the trigger hits the trigger manager), it will take the information from the trigger dictionary and send it to the various methods that await the trigger.
+
+### Trigger Manager
+The main class of the Trigger System is found in the "Scripts / Trigger System".
+The class, as mentioned before, waits for any type of trigger and then to notify or send the information (if any) to the various methods that are registered.
+
+The trigger manager has two variables in the inspector:
+- The first variable is a list of gameobjects, these gameobjects are the listeners of the trigger manager. When activating the trigger manager, the class notifies (and sends information) to all listeners, in particular to the components of the listeners who implement the ITrigger interface method.
+- The second variable is a list of tags, if the trigger (the gameobject) does not own those tags it will be ignored and the trigger manager will not be activated.
+
+### ITrigger
+This interface must be implemented for all classes waiting for a call from the trigger manager.
+
+#### Trigger
+The method is activated when called by the trigger manager.
+
+***Input**:
+- the first parameter is an instance of Informations, Informations is a class that only contains the string-object dictionary of the complex action class.
+- The second parameter is the list of the tags of the trigger (useful if you want to make a double check specific to each method).
+In this example there is a implementation fo Trigger Method:
+
+![Screenshot](Images/13.PNG)
+
+
+## FRAME RATE
+The "Script / framerate /" folder contains scripts that allow to calculate the frame rate of the game.
+The *FrameRateManager* script calculates the frameRate at the logical level, has a public property that shows the last frame rate calculated.
+
+Instead, the *FrameRateDebugManager* script shows the framerate in a text component of the UI.
+On the prefabs directory there is a prefab called frameRateUI which consists of an UI with the two collaborating scripts: just put the UI on the scene and the frameRate will be shown in the upper left corner.
+
+
+## GRAPH SYSTEM
+The folder "Script / Utily / graph" folder contains scripts that have the function of creating a logical graph with nodes and arcs.
+
+GRAPH <T>
+In this class, in the "Script / Utily / graph" folder, the graph can be direct or not directed.
+The generic parameter *T* must be substituted for the actual content of the vertex.
+The class consists of a set of vertices.
+
+### [T index]
+The index method of the graph: by placing the instance of the graph and in brackets the content of a vertex, it will be accessed, if it exists, the vertex of the graph that owns that content.
+
+### AddVertex
+This method adds, if not already existed, a vertex of the graph.
+
+**Input**:
+- The generic instance T that represents the contents of the vertex.
+
+### RemoveVertex
+This method removes a specific vertex of the graph.
+
+**Input**:
+- The generic instance T that represents the contents of the vertex.
+
+### AddArch
+This method adds an arc between two vertices of the graph (vertex 1 and vertex 2)
+
+**Input**:
+- The generic instance T that represents the content of vertex 1.
+- The generic instance T that represents the content of vertex 2.
+- An integer representing the weight of the bow.
+
+### RemoveArch
+This method removes an arc between two vertices of the graph (vertex 1 and vertex 2)
+
+**Input**:
+- The generic instance T that represents the content of vertex 1.
+- The generic instance T that represents the content of vertex 2.
+
+### HasVertex
+This method checks if the graph vertex exists
+
+**Input**:
+- The generic instance T that represents the content of the vertex to be checked if it exists in the graph.
+
+### HasArch
+This method controls whether there is an arc that connects two specific vertices of the graph (vertex 1 and vertex 2).
+
+**Input**:
+- The generic instance T that represents the content of vertex 1.
+- The generic instance T that represents the content of vertex 2.
