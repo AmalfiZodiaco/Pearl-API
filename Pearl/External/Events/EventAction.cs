@@ -3,9 +3,9 @@
     public enum EventAction
     {
         CallPause,
-        CallFrameRate,
         GetInputEntryMenu,
         GetInputReturnUI,
         NewScene,
+		//-------------------//
     }
 }
