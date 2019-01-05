@@ -9,8 +9,8 @@ Pearl is the set of my knowledge: a framework that facilitates the development o
 
 Pearl uses the updated version of NET (4.0); therefore, lower NET version will not make the framework work.
 
-To view a demo in Unity, view this [demo](https://github.com/AmalfiZodiaco/Pearl-Demo)
-The demo was performed on the LSV version of Unity 2017.
+To view a demo in Unity, view this [demo](https://github.com/AmalfiZodiaco/Pearl-Demo).
+The demo was performed on the LTS version of Unity 2017.
 
 ### FEATURES
 This is a list of the features of Pearl.
