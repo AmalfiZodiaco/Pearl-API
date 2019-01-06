@@ -1,4 +1,4 @@
-﻿namespace it.amalfi.Pearl.events
+﻿namespace Pearl.events
 {
     public enum EventAction
     {
@@ -6,6 +6,11 @@
         GetInputEntryMenu,
         GetInputReturnUI,
         NewScene,
-		//-------------------//
+        //-------------------//
+        GetInputMovement,
+        GetInputUse,
+        GetInputAttack,
+        CreatePlayer,
+        SendHealth,
     }
 }
