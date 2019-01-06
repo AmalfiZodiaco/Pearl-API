@@ -7,10 +7,5 @@
         GetInputReturnUI,
         NewScene,
         //-------------------//
-        GetInputMovement,
-        GetInputUse,
-        GetInputAttack,
-        CreatePlayer,
-        SendHealth,
     }
 }

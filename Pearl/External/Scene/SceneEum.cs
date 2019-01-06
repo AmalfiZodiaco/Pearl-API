@@ -6,8 +6,6 @@
     public enum SceneEnum
     {
         Null,
-        StartMenu,
-        Level,
         //-------------------//
     }
 }

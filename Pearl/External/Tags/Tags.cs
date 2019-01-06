@@ -8,12 +8,5 @@
         Panel,
         Pool,
         //-------------------//
-        Player,
-        Spawn,
-        Power,
-        Use,
-        Attack,
-        Arrow,
-        Obstacle
     }
 }
