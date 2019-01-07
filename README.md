@@ -457,6 +457,7 @@ By default there is the Null element, which must not be removed (the element is 
 The singleton class, found in the "Scripts / Game Manager System", has several variables in the inspector:
 - The version number of the game.
 - An element of SceneEnum that consists of the current scene.
+- A boolean representing the game is in debug mode (if it is true, it activates the frame count).
 If you want to create a custom GameManager, it must be a child of the GameManager (/ The naming convention is $ Game Title $ + "Manager"),
 Remember to replace the custom GameManager in the GameManager prefab.
 
