@@ -82,7 +82,7 @@ Precisely a manager registers at the event associated with a particular action. 
 
 For example, the UI entity registers its "ChangeBarHealth" method to the event associated with the "ChangeHealth" action: when the player is hurt, it will call the event associated with the "ChangeHealth" action, which will call all the methods associated with it. , including the "ChangeBarHealth" of the UI entity.
 
-nvece i componenti logici di un particolare gestore, non possono comunicare tra loro ma possono comunicare solo con il gestore stesso, attraverso interfacce molto precise
+Instead the logical components of a particular manager, can not communicate with each other but can communicate only with the manager himself, through very precise interfaces.
 
 ![Screenshot](Images/3.PNG)
 
